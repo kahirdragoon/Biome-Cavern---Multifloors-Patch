@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+  <Excluded>
+    <exclude>.git</exclude>
+    <exclude>1.6\Assemblies\.gitkeep</exclude>
+    <exclude>About\Preview.pdn</exclude>
+    <exclude>BiomesCavernsMultifloorsPatch.sln</exclude>
+    <exclude>CLAUDE.md</exclude>
+    <exclude>Defs\.gitkeep</exclude>
+    <exclude>Languages</exclude>
+    <exclude>Patches\.gitkeep</exclude>
+    <exclude>Source</exclude>
+    <exclude>Textures</exclude>
+  </Excluded>
+</Configuration>

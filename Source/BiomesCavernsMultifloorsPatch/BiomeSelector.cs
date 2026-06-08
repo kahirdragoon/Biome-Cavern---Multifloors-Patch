@@ -10,8 +10,10 @@ namespace BiomesCavernsMultifloorsPatch;
 /// Depth ladder (level is negative going down; depth = -level):
 ///   * depth >= EarthenDepthsDepth setting  -> Earthen Depths (and everything deeper).
 ///   * depth == 1 (first level below):
-///         Desert / ExtremeDesert surface   -> Desert Shallows (wrapper)
-///         Ice Sheet surface                -> Glacial Hollows (wrapper)
+///         desert surface  (Desert / ExtremeDesert; + Alpha Biomes Gallatross Graveyard / Rocky
+///                          Crags when loaded)              -> Desert Shallows (wrapper)
+///         ice surface     (IceSheet; + Alpha Biomes Propane Lakes when loaded)
+///                                                          -> Glacial Hollows (wrapper)
 ///         otherwise                        -> falls through to the alternation (random Fungal/Crystal)
 ///   * alternation zone: mirror the level directly above —
 ///         above was Fungal Forest          -> Crystal Caverns
@@ -21,6 +23,13 @@ namespace BiomesCavernsMultifloorsPatch;
 /// </summary>
 public static class BiomeSelector
 {
+    // Optional Alpha Biomes (sarg.alphabiomes) surfaces, mirroring the climate gates of the
+    // original Biomes Caverns variants. Resolved by name so they stay null when Alpha Biomes is
+    // not loaded — this static ctor runs at first use (map gen), long after defs are loaded.
+    private static readonly BiomeDef? AB_PropaneLakes = DefDatabase<BiomeDef>.GetNamedSilentFail("AB_PropaneLakes");
+    private static readonly BiomeDef? AB_GallatrossGraveyard = DefDatabase<BiomeDef>.GetNamedSilentFail("AB_GallatrossGraveyard");
+    private static readonly BiomeDef? AB_RockyCrags = DefDatabase<BiomeDef>.GetNamedSilentFail("AB_RockyCrags");
+
     public static BiomeDef SelectBiome(int level, Map sourceMap, Map groundMap)
     {
         int depth = -level;
@@ -33,9 +42,9 @@ public static class BiomeSelector
         BiomeDef? surface = (groundMap ?? sourceMap)?.Biome;
         if (depth == 1)
         {
-            if (surface == BCMFDefOf.Desert || surface == BCMFDefOf.ExtremeDesert)
+            if (IsDesertSurface(surface))
                 return BCMFDefOf.BCMF_DesertShallows;
-            if (surface == BCMFDefOf.IceSheet)
+            if (IsIceSurface(surface))
                 return BCMFDefOf.BCMF_GlacialHollows;
         }
 
@@ -47,4 +56,14 @@ public static class BiomeSelector
 
         return Rand.Bool ? BCMFDefOf.BMT_FungalForest : BCMFDefOf.BMT_CrystalCaverns;
     }
+
+    private static bool IsDesertSurface(BiomeDef? b) =>
+        b == BCMFDefOf.Desert
+        || b == BCMFDefOf.ExtremeDesert
+        || (AB_GallatrossGraveyard != null && b == AB_GallatrossGraveyard)
+        || (AB_RockyCrags != null && b == AB_RockyCrags);
+
+    private static bool IsIceSurface(BiomeDef? b) =>
+        b == BCMFDefOf.IceSheet
+        || (AB_PropaneLakes != null && b == AB_PropaneLakes);
 }
