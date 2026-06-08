@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net481</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <AppendConfigurationToOutputPath>false</AppendConfigurationToOutputPath>
+    <DebugType>none</DebugType>
+    <EnableNETAnalyzers>False</EnableNETAnalyzers>
+    <NoWarn>CS8603,CS0649,CS8618</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputPath>..\..\1.6\Assemblies\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.6.4633" />
+    <PackageReference Include="Lib.Harmony" Version="2.4.2">
+      <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <!--
+    Compile-time reference to MultiFloors (hard dependency). Relative path into the Steam
+    workshop folder, which shares the 'steamapps' root with this mod under 'common'.
+    Private=False: this DLL is only needed to compile against; it must NOT be copied to our
+    output / shipped with the mod (the player already has MultiFloors installed).
+  -->
+  <ItemGroup>
+    <Reference Include="MultiFloors">
+      <HintPath>..\..\..\..\..\..\workshop\content\294100\3384660931\1.6\Assemblies\MultiFloors.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>

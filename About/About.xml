@@ -1,0 +1,30 @@
+<ModMetaData>
+    <name>Biomes Caverns - Multifloors Patch</name>
+    <author>kahirdragoon</author>
+    <packageId>kahirdragoon.biomescavernsmultifloorspatch</packageId>
+    <supportedVersions>
+        <li>1.6</li>
+    </supportedVersions>
+    <description>A patch that makes lower-level maps spawned by Multifloors use Biomes Caverns map generation, so descending below the surface yields proper cavern biomes instead of the plain basement.</description>
+    <modDependencies>
+        <li>
+            <packageId>telardo.MultiFloors</packageId>
+            <displayName>MultiFloors</displayName>
+            <steamWorkshopUrl>steam://url/CommunityFilePage/3384660931</steamWorkshopUrl>
+        </li>
+        <li>
+            <packageId>BiomesTeam.BiomesCaverns</packageId>
+            <displayName>Biomes! Caverns</displayName>
+            <steamWorkshopUrl>steam://url/CommunityFilePage/2969748433</steamWorkshopUrl>
+        </li>
+    </modDependencies>
+    <loadAfter>
+        <li>ludeon.rimworld.royalty</li>
+        <li>ludeon.rimworld.ideology</li>
+        <li>ludeon.rimworld.biotech</li>
+        <li>ludeon.rimworld.anomaly</li>
+        <li>ludeon.rimworld.odyssey</li>
+        <li>telardo.MultiFloors</li>
+        <li>BiomesTeam.BiomesCaverns</li>
+    </loadAfter>
+</ModMetaData>

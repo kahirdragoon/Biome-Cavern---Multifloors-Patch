@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!--
+		Wrapper biome: bakes the Biomes Caverns "Glacial Hollows" BiomeVariantDef content
+		(BMT_GlacialHollows, "inside"/roofed-cave layer) into a force-assignable BiomeDef so it
+		can be set on a Multifloors basement pocket map via C#. Carries the BiomesMap cavern
+		extension so GenStep_RocksFromGrid auto-substitutes the cavern carve. Never generates
+		naturally on the world map.
+	-->
+	<BiomeDef>
+		<defName>BCMF_GlacialHollows</defName>
+		<label>glacial hollows</label>
+		<description>Sitting within the sometimes kilometers thick ice of permanently frozen regions, these hollows have never seen warmth. Nearly every surface is made of solid ice, so dense and cold that they are impervious to heat, with any warmth quickly drawn away. Little life can survive here, but what does is unsurprisingly quite hardy.</description>
+		<generatesNaturally>false</generatesNaturally>
+		<canBuildBase>true</canBuildBase>
+		<canAutoChoose>false</canAutoChoose>
+		<modExtensions>
+			<li Class="BiomesCore.DefModExtensions.BiomesMap">
+				<isCavern>true</isCavern>
+				<cavernShapes>
+					<li>SmallChambers</li>
+				</cavernShapes>
+			</li>
+		</modExtensions>
+		<animalDensity>3</animalDensity>
+		<plantDensity>1</plantDensity>
+		<wildPlantsAreCavePlants>true</wildPlantsAreCavePlants>
+		<wildPlantRegrowDays>20</wildPlantRegrowDays>
+		<movementDifficulty>0.5</movementDifficulty>
+		<forageability>0.5</forageability>
+		<disableShadows>true</disableShadows>
+		<disableSkyLighting>true</disableSkyLighting>
+		<noAmbientWind>true</noAmbientWind>
+		<constantOutdoorTemperature>-10</constantOutdoorTemperature>
+		<soundsAmbient>
+			<li>BMT_Ambient_FungalForest</li>
+		</soundsAmbient>
+		<diseaseMtbDays>120</diseaseMtbDays>
+		<diseases>
+			<li>
+				<diseaseInc>Disease_Flu</diseaseInc>
+				<commonality>100</commonality>
+			</li>
+			<li>
+				<diseaseInc>Disease_Plague</diseaseInc>
+				<commonality>60</commonality>
+			</li>
+			<li>
+				<diseaseInc>Disease_AnimalFlu</diseaseInc>
+				<commonality>100</commonality>
+			</li>
+			<li>
+				<diseaseInc>Disease_AnimalPlague</diseaseInc>
+				<commonality>60</commonality>
+			</li>
+		</diseases>
+		<terrainsByFertility>
+			<li>
+				<terrain>BMT_GlacialIce</terrain>
+				<min>-999</min>
+				<max>999</max>
+			</li>
+		</terrainsByFertility>
+		<baseWeatherCommonalities>
+			<BMT_Calm>100</BMT_Calm>
+			<DryThunderstorm>0</DryThunderstorm>
+			<FoggyRain>0</FoggyRain>
+			<Rain>0</Rain>
+			<RainyThunderstorm>0</RainyThunderstorm>
+			<SnowGentle>0</SnowGentle>
+			<SnowHard>0</SnowHard>
+		</baseWeatherCommonalities>
+		<wildPlants>
+			<!-- ground cover -->
+			<BMT_CavernMycelium>5.0</BMT_CavernMycelium>
+			<BMT_ReindeerMoss>0.5</BMT_ReindeerMoss>
+			<!-- mid sized -->
+			<BMT_CarveShroom>0.5</BMT_CarveShroom>
+			<BMT_Chubshroom>0.2</BMT_Chubshroom>
+			<BMT_FungalTendril>0.2</BMT_FungalTendril>
+			<BMT_Glittercap>0.1</BMT_Glittercap>
+			<BMT_RimeFlower>0.01</BMT_RimeFlower>
+			<!-- trees -->
+			<BMT_Frigu>0.5</BMT_Frigu>
+			<BMT_Curlbranch>0.1</BMT_Curlbranch>
+		</wildPlants>
+		<wildAnimals>
+			<!-- herbivores -->
+			<BMT_GlarralPenguin>0.2</BMT_GlarralPenguin>
+			<BMT_CaveLemming>0.4</BMT_CaveLemming>
+			<BMT_Snowstalker>0.35</BMT_Snowstalker>
+			<BMT_HoarfrostMastodon>0.2</BMT_HoarfrostMastodon>
+			<BMT_SilverSheep>0.3</BMT_SilverSheep>
+			<BMT_BeardedYak>0.5</BMT_BeardedYak>
+			<BMT_Pillbug>0.1</BMT_Pillbug>
+			<BMT_ChemSnail>0.025</BMT_ChemSnail>
+			<!-- predators -->
+			<BMT_FrostweaverSpider>0.2</BMT_FrostweaverSpider>
+			<BMT_Rimebeak>0.1</BMT_Rimebeak>
+			<!-- omnivore -->
+			<BMT_FreezerFrog>0.7</BMT_FreezerFrog>
+		</wildAnimals>
+		<pollutionWildAnimals/>
+	</BiomeDef>
+
+</Defs>

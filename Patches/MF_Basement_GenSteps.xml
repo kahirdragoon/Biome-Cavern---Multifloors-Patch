@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<!--
+		Add the vanilla Plants (order 900) and Animals (order 1200) gen steps to MF_Basement.
+		Multifloors omits them because its placeholder MF_BasementBiome has 0 plant/animal density,
+		so a stock basement only gets insects (its CaveHives step). Our cavern biomes DO define
+		wildPlants/wildAnimals, but nothing places them without these two steps. Both run after the
+		cavern carve and before MF_FogAllMap (order 1500). They key off map.Biome, so they stay
+		inert on a non-cavern basement (density 0 = nothing spawned).
+	-->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/MapGeneratorDef[defName="MF_Basement"]/genSteps</xpath>
+		<value>
+			<li>Plants</li>
+			<li>Animals</li>
+		</value>
+	</Operation>
+
+	<!--
+		Add the Biomes Caverns content-scatter gen steps to Multifloors' MF_Basement generator.
+		Biomes Caverns normally injects these into MapGeneratorDef[@Name="MapCommonBase"], which
+		MF_Basement does NOT inherit, so basements would otherwise get no crystals/stalagmites.
+
+		Both gen steps self-guard to cavern biomes (BMT_CrystalsGenerator only fires in Crystal
+		Caverns), so they are inert on any non-cavern basement. The actual cavern CARVING needs
+		no patch here: MF_Basement already runs MF_UndercaveRocksFromGrid (a GenStep_RocksFromGrid),
+		which Biomes Caverns' Harmony prefix auto-substitutes with GenStep_CavernRocksFromGrid once
+		the map's biome is a cavern biome (set per-level by this mod's C#).
+	-->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/MapGeneratorDef[defName="MF_Basement"]/genSteps</xpath>
+		<value>
+			<li>BMT_CrystalsGenerator</li>
+			<li>BMT_ScatterStalagmiteGenerator</li>
+		</value>
+	</Operation>
+
+</Patch>
